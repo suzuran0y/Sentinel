@@ -10,7 +10,14 @@
 
 🌐 **Language** --- [🇺🇸 English](README.md) | [🇨🇳 中文](README_CN.md)
 
-Sentinel is a distributed real-time vision system framework running in a local area network (LAN).  
+Sentinel is a distributed real-time vision system framework for local area networks (LAN).
+
+♻️ It repurposes unused Android devices as network camera nodes, enabling:
+
+- Distributed image acquisition
+- Real-time PC-side video streaming
+- AI-driven monitoring and analysis
+
 It adopts a layered architecture of **“mobile capture + PC processing + browser control”**, supporting real-time image preview, local video recording, and structured event analysis, and can be extended to integrate multimodal AI models.
 
 - The system consists of a PC Dashboard and an Android client CamFlow.
