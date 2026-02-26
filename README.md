@@ -18,7 +18,7 @@ It adopts a layered architecture of **“mobile capture + PC processing + browse
 This project can be used both as a lightweight local monitoring system and as an engineering prototype platform for visual data acquisition and intelligent analysis.
 
 > 🚀 Before first use, it is strongly recommended to read the chapters in order. Click to jump:  
-> ① [Project Overview](#sec1) → ② [Project Deployment (Must Read)](#3-项目部署必读) → ③ [Run the Project (Must Read)](#4-运行项目必读) → ④ [Dashboard Guide](#sec43)
+> ① [Project Overview](#sec1) → ② [Project Deployment](#sec3) → ③ [Run the Project](#sec4) → ④ [Dashboard Guide](#sec43)
 
 ## Table of Contents
 
