@@ -128,7 +128,7 @@ The system consists of three structural layers:
 2. Service Processing Layer (PC Server)
 3. Presentation & Control Layer (Browser Dashboard)
 
-```bash
+```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                         Android Client (CamFlow)
 │
@@ -407,7 +407,7 @@ Please complete the basic project deployment in the following order:
 
 ### 📂 Project Structure
 
-```bash
+```
 Sentinel/
 │
 ├── server.py                     # Program entry point (starts Flask, initializes runtime environment, launches threads)
@@ -538,7 +538,7 @@ pip install -r requirements.txt
 
 The dependency list includes:
 
-```bash
+```
 flask>=2.2                     # Web service
 numpy>=1.23                    # Image data processing
 opencv-python>=4.8             # Image decoding and video writing
@@ -554,13 +554,13 @@ volcenginesdkarkruntime        # AI module dependency
 The Android application CamFlow is responsible for camera capture and image upload.  
 The application source code is located in the repository path:
 
-```bash
+```
 PhoneCamSender/
 ```
 
 The precompiled APK file is located at:
 
-```bash
+```
 PhoneCamSender/CamFlow-v1.0.0-beta.apk
 ```
 
@@ -586,7 +586,7 @@ For developers who want to debug or modify features, the app can be built from s
 
 4. Wait for Gradle synchronization to complete, then run the project.
 
-> 📘 For detailed Android-side functionality and usage instructions, please refer to **[CamFlow User Guide](CamFlow_UserGuide_CN.md)**.
+> 📘 For detailed Android-side functionality and usage instructions, please refer to **[CamFlow User Guide](CamFlow_UserGuide.md)**.
 
 <a id="sec4"></a>
 
@@ -621,7 +621,7 @@ python server.py
 
 After successful startup, you should see output similar to:
 
-```bash
+```
 ===========================================================
 PhoneCam Server Started
 Local:   http://127.0.0.1:<PORT>/        for dashboard web  # Recommended address for browser
@@ -656,7 +656,7 @@ At this point, the PC-side service has started successfully.
 
 In CamFlow settings, enter the LAN IP address printed when running `server.py` on the PC:
 
-```bash
+```
 <LAN_IP> or <LAN_IP>:<PORT>             # Extract from http://<LAN_IP>:<PORT>/
 ```
 
@@ -678,7 +678,7 @@ In CamFlow settings, enter the LAN IP address printed when running `server.py` o
 - Under normal conditions, once `Ingest` is switched to ON, the Live View section in the Dashboard will immediately update with the camera feed from the device.
 
 At this point, the CamFlow service and data transmission to the PC have been successfully started.  
-For detailed usage instructions of CamFlow, please refer to the repository documentation: **[CamFlow User Guide](CamFlow_UserGuide_CN.md)**.
+For detailed usage instructions of CamFlow, please refer to the repository documentation: **[CamFlow User Guide](CamFlow_UserGuide.md)**.
 
 ---
 
@@ -872,7 +872,7 @@ The modular design supports pluggable models, structured output contracts, and s
 
 #### AI Module Main Workflow Framework (From Frame to Dashboard)
 
-```bash
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                            Data Input Layer                    
 │  CamFlow → POST /upload → FrameBuffer (Latest Frame Cache)  
@@ -976,7 +976,7 @@ It is recommended to understand the purpose of each parameter before enabling th
 
 Example:
 
-```text
+```
 You are a video surveillance assistant. You will receive a monitoring image and background information. Only output a JSON object including whether a person is present, number of people, activity, risk level, and a brief summary.
 ```
 
@@ -984,7 +984,7 @@ You are a video surveillance assistant. You will receive a monitoring image and 
 
 Example:
 
-```text
+```
 Home scenario: the camera faces the living room.
 Office scenario: the camera faces the workspace area. Multiple people during working hours are normal.
 ```
@@ -993,7 +993,7 @@ Office scenario: the camera faces the workspace area. Multiple people during wor
 
 Example:
 
-```text
+```
 Currently focus on whether children approach the balcony area.
 ```
 
@@ -1001,7 +1001,7 @@ Currently focus on whether children approach the balcony area.
 
 Example:
 
-```text
+```
 Use Chinese for the summary.
 If uncertain, keep has_person=false.
 ```
@@ -1024,7 +1024,7 @@ This area visualizes the runtime status of the backend AI state machine in real 
 
 Located at the top of the AI Status panel, displaying the current state machine runtime status:
 
-```bash
+```
 ┌────────────────────────┬──────────────────┬─────────────────┬──────────────────────┐
 | STATE: SLEEP / OBSERVE | Event: evt_xxxxx | Dwell: Yes / No | Health: Fine / Error |
 └────────────────────────┴──────────────────┴─────────────────┴──────────────────────┘
@@ -1050,7 +1050,7 @@ Located at the top of the AI Status panel, displaying the current state machine 
 > To stabilize output structure, the system enforces an Output Contract mechanism.  
 > The model must output a JSON object containing at least the following fields:
 
-```bash
+```
 {
   "has_person": bool,
   "person_count": int,
@@ -1063,7 +1063,7 @@ Located at the top of the AI Status panel, displaying the current state machine 
 
 After structured extraction, the Dashboard presents a human-readable format (example):
 
-```bash
+```
 Person: No | Count: 0 | Activity: unknown | Risk: info | Conf: 99%
 Summary: This indoor CCTV scene contains no people...
 ```
@@ -1086,7 +1086,7 @@ If the model response is incomplete, it will be processed to ensure the Dashboar
 
 Calculates runtime timing information for the event monitoring module (example):
 
-```bash
+```
 Last trigger: 2026-02-24 01:48:37 (2m ago)
 Last AI call: 2026-02-24 01:51:05 (6s ago)
 Event start:  2026-02-24 01:48:37 (2m ago)
@@ -1102,7 +1102,7 @@ Event start:  2026-02-24 01:48:37 (2m ago)
 
 ④ Event Metrics (Metrics) (Example)
 
-```bash
+```
 Person present (acc): 115.0 s
 Event duration: 153.9 s
 ```
@@ -1131,7 +1131,7 @@ Useful for debugging Prompt configuration and checking field completeness.
 When the system runs for the first time, this section is empty.  
 After an event ends, it is written into `log/ai_events.jsonl` and displayed in chronological order on the page (example):
 
-```bash
+```
 ┌────────────────────────────────────────────────────────────┐
 │ 2026-02-24 01:51:03   AI   🔴 critical                    
 │ Person: Yes | Count: 1 | Activity: lingering              
