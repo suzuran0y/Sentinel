@@ -1,0 +1,4 @@
+flask>=2.2
+numpy>=1.23
+opencv-python>=4.8
+volcenginesdkarkruntime

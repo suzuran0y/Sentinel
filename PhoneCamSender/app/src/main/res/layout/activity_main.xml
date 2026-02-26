@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="settings"
+        android:src="@android:drawable/ic_menu_manage" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+    android:id="@+id/blackScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/overlayText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:background="#80000000"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        android:text="debug"/>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Status: Not connected"
+        android:textSize="16sp"
+        android:background="#80000000"
+        android:textColor="#FFFFFF" />
+
+</FrameLayout>

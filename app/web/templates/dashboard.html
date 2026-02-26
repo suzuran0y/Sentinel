@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PhoneCam Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-title">Sentinel System Dashboard</div>
+      <div class="brand-subtitle">
+        Multi-Device Vision Monitoring & Risk Detection System
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="shutdownBtn" class="danger" type="button" title="Stop server and close this page">
+        Shutdown
+      </button>
+    </div>
+  </div>
+
+
+  <div class="layout">
+    <!-- Left: Live view -->
+    <div id="leftPane" class="pane left">
+      <div class="card">
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <b>Live View</b>
+        </div>
+
+        <div style="margin-top:10px;">
+          <img id="live" src="/stream" alt="live stream"/>
+        </div>
+
+        <div class="row" style="margin-top:12px; flex-wrap:wrap; gap:8px;">
+          <button id="ingestToggleBtn" type="button">Enable Ingest</button>
+          <button id="recordToggleBtn" type="button">Start Recording</button>
+          <button id="snapshotBtn" class="success" type="button" onclick="snapshot()">Snapshot</button>
+        </div>
+
+        <div class="hint" style="margin-top:10px;">
+          Tips: Adjust the settings → Enable Ingest → See the picture → Start Recording
+        </div>
+      </div>
+
+      <!-- Monitor status -->
+      <div class="card" style="margin-top:12px;">
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <b>Monitor Status</b>
+        </div>
+
+        <!-- Readable Status (replace raw pre) -->
+        <div style="margin-top:10px;">
+          <div id="status_readable" class="status-card">
+            <div class="hint">loading…</div>
+          </div>
+        </div>
+
+        <!-- Logs collapsible -->
+        <details class="logs-box" style="margin-top:12px;">
+          <summary><b>Logs</b></summary>
+          <pre id="log_tail" class="preTall">loading.</pre>
+        </details>
+      </div>
+
+
+    </div>
+
+    <!-- Splitter -->
+    <div id="splitter" class="splitter" title="Drag to resize"></div>
+
+    <!-- Right: Settings -->
+    <div id="rightPane" class="pane right">
+      <div class="card">
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <b>Settings</b>
+          <button id="toggleSettingsBtn" type="button" onclick="toggleSettings()">Collapse</button>
+        </div>
+
+        <div id="settingsBody">
+          <!-- Basic config -->
+        <div class="settings-grid">
+
+          <div class="field">
+            <label>Stream FPS</label>
+            <input id="stream_fps" type="number" min="1" max="30">
+          </div>
+
+          <div class="field">
+            <label>JPEG Quality</label>
+            <input id="jpeg_quality" type="number" min="30" max="95">
+          </div>
+
+          <div class="field">
+            <label>Record FPS</label>
+            <input id="record_fps" type="number" min="1" max="30">
+          </div>
+
+          <div class="field">
+            <label>Segment Secs</label>
+            <input id="segment_seconds" type="number" min="10" max="86400">
+          </div>
+
+          <div class="field">
+            <label>Output Root</label>
+            <input id="out_root" type="text" placeholder="e.g. recordings">
+          </div>
+
+          <div class="field">
+            <label>Cam Name</label>
+            <input id="cam_name" type="text" placeholder="e.g. cam1">
+          </div>
+
+          <div class="field">
+            <label>Codec</label>
+            <select id="codec">
+              <option value="mp4v">mp4v</option>
+              <option value="XVID">XVID</option>
+              <option value="avc1">avc1</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Autosave</label>
+            <select id="autosave">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </div>
+
+        </div>
+
+
+          <hr style="margin:14px 0;"/>
+
+          <!-- ===== AI header (always visible) ===== -->
+          <div id="aiHeaderRow" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+              <div style="font-weight:700;">AI Monitoring</div>
+              <div class="hint">Enable to show AI settings and status</div>
+            </div>
+            <button id="aiToggleBtn" type="button">Enable</button>
+          </div>
+
+          <!-- real switch used by applyConfig() -->
+          <label style="display:none;">
+            <input type="checkbox" id="ai_enabled">
+          </label>
+
+          <!-- ===== AI panel (hidden when disabled) ===== -->
+          <div id="aiPanel" style="display:none; margin-top:12px;">
+
+            <!-- AI Settings -->
+            <div id="aiSettingsSection" class="ai-grid">
+              <div class="field">
+                <label>Model / Endpoint</label>
+                <input id="ark_model" type="text" placeholder="ep-xxxx / model-id">
+              </div>
+
+              <div class="field">
+                <label>API Key</label>
+                <input id="ark_api_key" type="password" placeholder="API_KEY">
+              </div>
+
+              <div class="field">
+                <label>OBSERVE Interval (sec)</label>
+                <input id="ai_interval_observe" type="number" min="1" max="60" step="0.5">
+              </div>
+
+              <div class="field">
+                <label>Dwell Threshold (sec)</label>
+                <input id="ai_dwell_threshold_sec" type="number" min="1" max="600" step="1">
+              </div>
+
+              <div class="field">
+                <label>End Grace (sec)</label>
+                <input id="ai_end_grace_sec" type="number" min="0" max="60" step="0.5">
+              </div>
+
+              <div class="field">
+                <label>AI JPEG Quality</label>
+                <input id="ai_jpeg_quality" type="number" min="50" max="95" step="1">
+              </div>
+
+              <div class="field">
+                <label>Motion Threshold (ratio)</label>
+                <input id="motion_ratio_threshold" type="number" min="0.001" max="0.5" step="0.001">
+              </div>
+
+              <div class="field">
+                <label>Motion Min Interval (sec)</label>
+                <input id="motion_min_interval" type="number" min="0.1" max="10" step="0.1">
+              </div>
+
+              <!-- Long text fields: span full row -->
+              <div class="field span-2">
+                <label>Prompt Template (Role)</label>
+                <textarea id="ai_prompt_template" rows="2"></textarea>
+              </div>
+
+              <div class="field span-2">
+                <label>Scene Profile (Long-term)</label>
+                <textarea id="ai_scene_profile" rows="2"></textarea>
+              </div>
+
+              <div class="field span-2">
+                <label>Session Focus (Short-term)</label>
+                <textarea id="ai_session_focus" rows="2"></textarea>
+              </div>
+
+              <div class="field span-2">
+                <label>Extra Prompt / Rules</label>
+                <textarea id="ai_prompt_extra" rows="2"></textarea>
+              </div>
+
+            </div>
+
+            <hr style="margin:14px 0;"/>
+
+            <!-- AI Status -->
+            <b>AI Status</b>
+
+            <div id="aiStatusCard" class="ai-status-card">
+              <div class="ai-status-header">
+                <span id="aiStateBadge" class="badge">STATE: ?</span>
+                <span id="aiEventId" class="hint">Event: —</span>
+                <span id="aiDwell" class="hint">Dwell: —</span>
+                <span id="aiHealth" class="hint">Health: —</span>
+              </div>
+
+              <div class="ai-status-section">
+                <div class="ai-status-title">Last AI Result</div>
+                <div id="aiLastLine" class="ai-history-list">waiting…</div>
+                <div id="aiLastSummary" class="ai-history-list"></div>
+              </div>
+
+              <div class="ai-status-section">
+                <div class="ai-status-title">Times</div>
+                <div id="aiTimes" class="ai-kv">—</div>
+              </div>
+
+              <div class="ai-status-section">
+                <div class="ai-status-title">Metrics</div>
+                <div id="aiMetrics" class="ai-kv">—</div>
+              </div>
+
+              <details class="ai-raw">
+                <summary>Raw JSON</summary>
+                <pre id="ai_status_raw">loading…</pre>
+              </details>
+
+              <div class="ai-history">
+                <div class="ai-status-title">History List</div>
+                <div id="aiHistoryList" class="ai-history-list">
+                  <div class="hint">loading…</div>
+                </div>
+              </div>
+</div>
+
+            </div>
+
+
+            <!-- AI Events -->
+
+          </div>
+
+          <hr style="margin:14px 0;"/>
+
+          <!-- Apply / Save / Load -->
+          <div class="row" style="gap:8px; flex-wrap:wrap;">
+            <button class="primary" type="button" onclick="applyConfig()">Apply</button>
+            <button type="button" onclick="saveConfig()">Save</button>
+            <button type="button" onclick="loadConfig()">Load</button>
+          </div>
+
+          <div id="msg" class="hint" style="margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <span>Sentinel System Dashboard</span>
+      <span>·</span>
+      <span>v1.0.0-beta</span>
+      <span>·</span>
+      <span> Feb 23, 2026</span>
+      <span>·</span>
+      <span>Made by Suzuran0y</span>
+    </div>
+  </footer>
+
+</body>
+</html>

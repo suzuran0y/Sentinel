@@ -1,0 +1,34 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+*.pkl
+
+# Virtual environments
+venv/
+.env/
+.env.*
+.venv/
+
+# IDE configuration files
+.idea/
+.vscode/
+*.iml
+
+# Log files
+log/*
+!log/.gitkeep
+
+# Runtime-generated files
+recordings/*
+!recordings/.gitkeep
+
+# Local configuration files
+app/config/config.json
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini

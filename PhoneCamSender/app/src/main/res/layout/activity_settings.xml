@@ -1,0 +1,97 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/settingsScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textVersion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Server address"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/addrInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g. 314.15.926.535"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnDiscover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Auto discover" />
+
+            <Button
+                android:id="@+id/btnTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test connection" />
+
+            <Switch
+                android:id="@+id/switchShowDebug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show debug info" />
+
+            <Switch
+                android:id="@+id/switchHidePreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hide camera preview" />
+
+            <Switch
+                android:id="@+id/switchStopCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stop camera" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+
+            <TextView
+                android:id="@+id/tipText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:text="Tip: Cam and PC must be on the same Wi-Fi."
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center"
+        android:text="CamFlow v1.0.0-beta"
+        android:textSize="13sp"
+        android:textColor="#888888"
+        android:alpha="0.85"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
