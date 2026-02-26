@@ -4,7 +4,7 @@
 
 ![Version](https://img.shields.io/badge/version-v1.0.0-black)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
-[![Android](https://img.shields.io/badge/Android-8.0%2B-green)](CamFlow_UserGuide_CN.md)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-green)](CamFlow_UserGuide.md)
 [![AI](https://img.shields.io/badge/AI-Multimodal-purple)](#sec46)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#sec54)
 
