@@ -8,7 +8,7 @@
 [![AI](https://img.shields.io/badge/AI-Multimodal-purple)](#sec46)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#sec54)
 
-🌐 **Language** --- [🇺🇸 English](CamFlow_UserGuide.md) | [🇨🇳 中文](CamFlow_UserGuide_CN.md)
+🌐 **Language** --- [🇺🇸 English](README.md) | [🇨🇳 中文](README_CN.md)
 
 Sentinel is a distributed real-time vision system framework running in a local area network (LAN).  
 It adopts a layered architecture of **“mobile capture + PC processing + browser control”**, supporting real-time image preview, local video recording, and structured event analysis, and can be extended to integrate multimodal AI models.
