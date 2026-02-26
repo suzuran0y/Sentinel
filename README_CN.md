@@ -9,7 +9,7 @@
 [![AI](https://img.shields.io/badge/AI-Multimodal-purple)](#sec46)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
 
-🌐 **语言** --- [🇨🇳 中文](CamFlow_UserGuide_CN.md) | [🇺🇸 English](CamFlow_UserGuide.md)
+🌐 **语言** --- [🇨🇳 中文](README_CN.md) | [🇺🇸 English](README.md)
 
 
 Sentinel 是一个运行于局域网环境中的分布式实时视觉系统框架。  
