@@ -7,15 +7,21 @@
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![Android](https://img.shields.io/badge/Android-8.0%2B-green)](CamFlow_UserGuide_CN.md)
 [![AI](https://img.shields.io/badge/AI-Multimodal-purple)](#sec46)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#sec54)
 
 🌐 **语言** --- [🇨🇳 中文](README_CN.md) | [🇺🇸 English](README.md)
 
+Sentinel 是一个运行于局域网环境中的分布式实时视觉系统框架。
 
-Sentinel 是一个运行于局域网环境中的分布式实时视觉系统框架。  
+♻️ 支持将闲置安卓设备转化为网络摄像头节点，实现：
+
+- 局域网图像采集与上传；
+- PC 端实时视频展示；
+- AI 监控分析。
+
 系统采用“移动端采集 + PC 端处理 + 浏览器控制”的分层架构设计，支持实时图像预览、本地视频录制与结构化事件分析，并可扩展接入多模态 AI 模型。
 
-- 系统由PC 端 Dashboard + CamFlow 安卓客户端  
+- 系统前端由 PC 端 Dashboard + CamFlow 安卓客户端组成。  
 
 本项目既可作为轻量级本地监控系统使用，亦可作为视觉数据采集与智能分析的工程原型平台。
 
